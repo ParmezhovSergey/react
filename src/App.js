@@ -26,6 +26,7 @@ const DialogsContainer = React.lazy(() =>
 
 
 
+
 class App extends Component {
   componentDidMount() {
     this.props.initializeApp();
