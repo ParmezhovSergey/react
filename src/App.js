@@ -15,6 +15,8 @@ import { initializeApp } from "./redux/app-reducer";
 import Preloader from "./components/common/Preloader/preloader";
 import store from "./redux/redux-store";
 import { BrowserRouter } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 //import ProfileContainer from "./components/ProfileContainer";
 //import DialogsContainer from "./components/Dialogs/DialogsContainer";
 const ProfileContainer = React.lazy(() =>
@@ -23,9 +25,6 @@ const ProfileContainer = React.lazy(() =>
 const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/DialogsContainer")
 );
-
-
-
 
 class App extends Component {
   componentDidMount() {
@@ -40,37 +39,46 @@ class App extends Component {
         <HeaderContainer />
         <Navbar />
         <div className="app-wrapper-content">
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => {
+                return <Redirect to={"/profile"} />;
+              }}
+            />
 
-          <Route
-            path="/profile/:userId?"
-            render={() => {
-              return (
-                <React.Suspense fallback={<div>Loading...</div>}>
-                  <ProfileContainer />
-                </React.Suspense>
-              );
-            }}
-          />
+            <Route
+              path="/profile/:userId?"
+              render={() => {
+                return (
+                  <React.Suspense fallback={<div>Loading...</div>}>
+                    <ProfileContainer />
+                  </React.Suspense>
+                );
+              }}
+            />
 
-          <Route
-            path="/dialogs"
-            render={() => {
-              return (
-                <React.Suspense fallback={<div>Loading...</div>}>
-                  <DialogsContainer />
-                </React.Suspense>
-              );
-            }}
-          />
+            <Route
+              path="/dialogs"
+              render={() => {
+                return (
+                  <React.Suspense fallback={<div>Loading...</div>}>
+                    <DialogsContainer />
+                  </React.Suspense>
+                );
+              }}
+            />
 
-          <Route path="/users" render={() => <UsersContainer />} />
+            <Route path="/users" render={() => <UsersContainer />} />
 
-          <Route path="/login" render={() => <Login />} />
+            <Route path="/login" render={() => <Login />} />
 
-          <Route path="/news" element={<News />} />
+            <Route path="/news" element={<News />} />
 
-          <Route path="/music" element={<Music />} />
-          <Route path="/settings" element={<Settings />} />
+            <Route path="/music" element={<Music />} />
+            <Route path="/settings" element={<Settings />} />
+          </Switch>
         </div>
       </div>
     );
