@@ -26,6 +26,8 @@ const DialogsContainer = React.lazy(() =>
   import("./components/Dialogs/DialogsContainer")
 );
 
+
+
 class App extends Component {
   componentDidMount() {
     this.props.initializeApp();
