@@ -1,5 +1,4 @@
 import { getAuthUserData } from "./auth-reducer";
-import React from "react";
 
 
 const INITIALIZED_SUCCESS = "INITIALIZED_SUCCESS";
